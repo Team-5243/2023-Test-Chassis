@@ -3,7 +3,6 @@
 // the WPILib BSD license file in the root directory of this project.
 
 package frc.robot;
-
 import edu.wpi.first.wpilibj.Joystick;
 
 /**
@@ -20,5 +19,6 @@ public final class Constants {
     public static int BLCAN=2;
     public static int BRCAN=4;
     public static Joystick LEFTJOY = new Joystick(0);
+    public static Joystick RIGHTJOY = new Joystick(1);
     //public static Joystick RIGHTJOY = new Joystick(0);
 }

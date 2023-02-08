@@ -14,14 +14,17 @@ import frc.robot.commands.DriveCommand;
 
 public class DriveSubsystem extends SubsystemBase {
   PWMSparkMax fr, fl, br, bl;
+  double s = 0, rot = 0, a = 0.5;
   DifferentialDrive diffDrive;
-
+/*fdshfhdjshfhgtjvddsgsjfhdisjgdfgsdjglsfhdsjfshfsdjiotfds System.Out.Println("L") */
   /** Creates a new ExampleSubsystem. */
   public DriveSubsystem() {
     fl = new PWMSparkMax(Constants.FLCAN);
-    //fl.setInverted(true);
+    //fl.setInverted(false);
     fr = new PWMSparkMax(Constants.FRCAN);
+    //fr.setInverted(false);
     br = new PWMSparkMax(Constants.BRCAN);
+    //br.setInverted(false);
     bl = new PWMSparkMax(Constants.BLCAN);
     //bl.setInverted(true);
 
@@ -31,8 +34,22 @@ public class DriveSubsystem extends SubsystemBase {
 
     
   }
+
+  
   public void arcadeDrive(){
-    diffDrive.arcadeDrive(Constants.LEFTJOY.getY(), Constants.LEFTJOY.getX());
+    diffDrive.arcadeDrive(Constants.LEFTJOY.getX(), -1*Constants.LEFTJOY.getY());
+  }
+
+  public void LParcadeDrive(){
+    diffDrive.arcadeDrive(
+      -a*Constants.LEFTJOY.getX() + (a-1)*rot, 
+      a*Constants.LEFTJOY.getY() + (a-1)*s);
+      s = Constants.LEFTJOY.getY();
+      rot = Constants.LEFTJOY.getX();
+  }
+
+  public void tankDrive(){
+    diffDrive.tankDrive(-1*Constants.LEFTJOY.getY(), Constants.RIGHTJOY.getY());
   }
 
   public void setMotors(double left, double right) {
@@ -42,9 +59,6 @@ public class DriveSubsystem extends SubsystemBase {
   public void stopDrive() {
     diffDrive.arcadeDrive(0, 0);
 }
-
-
-
 
   @Override
   public void periodic() {
