@@ -18,6 +18,9 @@ public final class Constants {
     public static int FRCAN=3;
     public static int BLCAN=2;
     public static int BRCAN=4;
+    public static int PENUMATIC_A = 2;
+    public static int PENUMATIC_B = 1;
+
     public static Joystick LEFTJOY = new Joystick(0);
     public static Joystick RIGHTJOY = new Joystick(1);
     //public static Joystick RIGHTJOY = new Joystick(0);

@@ -7,35 +7,52 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.commands.PneumaticsCommand;
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.Solenoid;
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import frc.robot.Constants;
 
-public class PneumaticsSubsystem extends SubsystemBase {
+public class PneumaticsSubsystem extends SubsystemBase{
   /** Creates a new PneumaticsSubsytem. */
-  Solenoid testSolenoid;
+  DoubleSolenoid testSolenoid;
+  Compressor testPCMCompressor;
   public PneumaticsSubsystem() {
-    testSolenoid = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
-    testSolenoid.set(true);
-   // pcmCompressor  = new Compressor(0, PneumaticsModuleType.CTREPCM);
+    testSolenoid = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, Constants.PENUMATIC_A, Constants.PENUMATIC_B);
+    testPCMCompressor = new Compressor(PneumaticsModuleType.CTREPCM);
+    testPCMCompressor.enableDigital();
+    //testPCMCompressor.disable();
+    //testPCMCompressor.enableDigital();
+    //testPCMCompressor.enableAnalog(80, 100);
+
+    // pcmCompressor  = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  }   
+
+  public void expand() {
+    testSolenoid.set(Value.kForward);
   }
 
-  public void PneumaticsControl() {
-    if (Constants.LEFTJOY.getRawButton(2)){
-      testSolenoid.toggle();
-    }
+  public void toggle() {
+    testSolenoid.toggle();    
   }
 
+  public void stop() {
+    testSolenoid.set(Value.kOff);
+  }
+
+
+
+    // if(Constants.LEFTJOY.getRawButton(4)){
+    //   testSolenoid.toggle();
+    // }
+  
   
   @Override
   public void periodic() {
-   // setDefaultCommand(new PneumaticsCommand(this));
-    // This method will be called once per scheduler run
+   //setDefaultCommand(new PneumaticsCommand(this));
+  }
+  @Override
+  public void simulationPeriodic() {
+    // This method will be called once per scheduler run during simulation
   }
 
-
-
-    private void ressor(int i, PneumaticsModuleType ctrepcm) {
-    }
 }

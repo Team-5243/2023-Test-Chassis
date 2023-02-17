@@ -5,7 +5,6 @@
 package frc.robot.commands;
 
 import frc.robot.subsystems.PneumaticsSubsystem;
-import frc.robot.subsystems.PneumaticsSubsystem;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 public class PneumaticsCommand extends CommandBase {
@@ -13,21 +12,21 @@ public class PneumaticsCommand extends CommandBase {
   private final PneumaticsSubsystem m_subsystem;
   public PneumaticsCommand(PneumaticsSubsystem subsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_subsystem= subsystem;
+    m_subsystem = subsystem;
 
     addRequirements(subsystem);
   }
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     //PUT FINAL METHOD IN HERE DUMBASS!!!!!!!!
-    m_subsystem.PneumaticsControl();
-
+    m_subsystem.toggle();
   }
 
   // Called once the command ends or is interrupted.

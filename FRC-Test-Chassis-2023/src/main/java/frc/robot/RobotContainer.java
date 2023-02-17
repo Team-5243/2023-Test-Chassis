@@ -7,8 +7,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.DriveCommand;
+import frc.robot.commands.PneumaticsCommand;
 import frc.robot.subsystems.DriveSubsystem;
+import frc.robot.subsystems.PneumaticsSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,10 +22,12 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
+  //private final DriveSubsystem m_driveSubsystem = new DriveSubsystem();
 
-  private final DriveCommand m_autoCommand = new DriveCommand(m_driveSubsystem);
+  //private final DriveCommand m_autoCommand = new DriveCommand(m_driveSubsystem);
 
+  private final PneumaticsSubsystem m_pneumaticsSubsystem = new PneumaticsSubsystem();
+  private final PneumaticsCommand m_pneumaticsCommand = new PneumaticsCommand(m_pneumaticsSubsystem);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
@@ -34,7 +40,10 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    new JoystickButton(Constants.LEFTJOY, 3)
+        .whenHeld(m_pneumaticsCommand);
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -43,6 +52,11 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return m_pneumaticsCommand;
   }
+
+  public PneumaticsSubsystem getM_pneumaticsSubsystem() {
+      return m_pneumaticsSubsystem;
+  }
+
 }
