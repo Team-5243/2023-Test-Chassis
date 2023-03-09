@@ -79,7 +79,7 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    m_robotContainer.getM_pneumaticsSubsystem().expand();
+    m_robotContainer.getM_pneumaticsSubsystem().retract();
   }
 
   /** This function is called periodically during operator control. */
